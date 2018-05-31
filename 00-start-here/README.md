@@ -1,6 +1,6 @@
 # Using Vagrant
 
-There is a [Vagrantfile](./Vagrantfile) in the 00-start-here folder of this repository, which will provision a Vagrant box that contains all the necessary tools needed to conduct the labs. You will need to have the following installed on your local host:
+There is a [Vagrantfile](./Vagrantfile) in the [00-start-here] folder of this repository, which will provision a Vagrant box that contains all the necessary tools needed to conduct the labs. You will need to have the following installed on your local host:
 
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads/)
@@ -57,4 +57,14 @@ From the root of the repository:
 cd 00-start-here
 vagrant up
 vagrant ssh
+```
+
+## Testing the Vagrant Box
+
+ssh to the guest box and run the following commands:
+
+```bash
+kubectl version
+kops version
+aws help
 ```
