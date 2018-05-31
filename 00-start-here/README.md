@@ -1,6 +1,6 @@
 # Using Vagrant
 
-There is a [Vagrantfile](./Vagrantfile) in the [00-start-here] folder of this repository, which will provision a Vagrant box that contains all the necessary tools needed to conduct the labs. You will need to have the following installed on your local host:
+There is a [Vagrantfile](./Vagrantfile) in the [00-start-here](.) folder of this repository, which will provision a Vagrant box that contains all the necessary tools needed to conduct the labs. You will need to have the following installed on your local host:
 
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads/)
@@ -20,7 +20,8 @@ cd 00-start-here
 
 You can use your existing AWS user account or you can choose to create a dedicated user account for Kops.
 
-### Use an existing AWS user account
+### Setup Kops Requirments
+Please refer to [kops requirments](https://github.com/kubernetes/kops/blob/master/docs/aws.md).
 
 If you are using your existing AWS user account, you must have at a minimum the following [IAM policies attached](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console) to it (or you can use the `AdministratorAccess` policy which includes all of these permissions):
 
