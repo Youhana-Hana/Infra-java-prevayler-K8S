@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Exit on first failure and treat unset variables as error
+set -eu
+
+# Cluster alias default to dev
+export CLUSTER_ALIAS="dev"
+
+while getopts t: option
+do
+    case "${option}"
+    in
+        t) CLUSTER_ALIAS=${OPTARG};;
+    esac
+done
+
+if ! [[ "${CLUSTER_ALIAS}" =~ ^(dev|prod)$ ]]; then
+    echo "Target evnironment must be dev or prod";
+    exit 1;
+fi
+
+echo -e "Running aginst ${CLUSTER_ALIAS}"
+
+# Domain name that is hosted in AWS Route 53
+export DOMAIN_NAME="${CLUSTER_ALIAS}_CLUSTER_DOMAIN_NAME";
+
+# Cluster Full DNS name
+export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${!DOMAIN_NAME}"
+
+# Delete the cluster:
+kops delete cluster ${CLUSTER_FULL_NAME} --yes
+
+# Delete the S3 bucket in AWS
+aws s3api delete-bucket --bucket ${CLUSTER_FULL_NAME}-state

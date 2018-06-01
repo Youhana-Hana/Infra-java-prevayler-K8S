@@ -58,5 +58,9 @@ kubectl config set-context ${CLUSTER_ALIAS} --cluster=${CLUSTER_FULL_NAME} --use
 #Use this new cluster context
 kubectl config use-context ${CLUSTER_ALIAS}
 
-# Smoke test, get cluster nodes
+echo 'Sleep for five minutes unti cluster created'
+sleep 5m
+
+# get cluster nodes
 kubectl get nodes
+
