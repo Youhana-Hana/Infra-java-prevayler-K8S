@@ -4,8 +4,8 @@
 set -eu
 
 # check AWS credentials exported
-:${AWS_ACCESS_KEY_ID:?Need to set AWS Access Key ID}
-:${AWS_SECRET_ACCESS_KEY:?Need to set AWS Secret Access Key}
+:"${AWS_ACCESS_KEY_ID:?Need to set AWS Access Key ID}"
+:"${AWS_SECRET_ACCESS_KEY:?Need to set AWS Secret Access Key}"
 
 # Cluster alias default to dev
 export CLUSTER_ALIAS="dev"
