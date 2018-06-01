@@ -23,6 +23,8 @@ if ! [[ "${CLUSTER_ALIAS}" =~ ^(dev|prod)$ ]]; then
     exit 1;
 fi
 
+echo -e "Running aginst ${CLUSTER_ALIAS}"
+
 # Domain name that is hosted in AWS Route 53
 export DOMAIN_NAME="${CLUSTER_ALIAS}_CLUSTER_DOMAIN_NAME";
 
