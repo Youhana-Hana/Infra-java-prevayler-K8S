@@ -3,17 +3,9 @@
 # Exit on first failure and treat unset variables as error
 set -eu
 
-# check environment variable is set
-function checkEnv {
-    if [ -z ${1+x} ]; then
-        echo "$1 is unset";
-        exit 1;
-    fi
-}
-
 # check AWS credentials exported
-checkEnv "AWS_ACCESS_KEY_ID"
-checkEnv "AWS_SECRET_ACCESS_KEY"
+:${AWS_ACCESS_KEY_ID:?Need to set AWS Access Key ID}
+:${AWS_SECRET_ACCESS_KEY:?Need to set AWS Secret Access Key}
 
 # Cluster alias default to dev
 export CLUSTER_ALIAS="dev"
@@ -26,7 +18,7 @@ do
     esac
 done
 
-if [[ "${CLUSTER_ALIAS}" =~ ^(dev|prod)$ ]]; then
+if ! [[ "${CLUSTER_ALIAS}" =~ ^(dev|prod)$ ]]; then
     echo "Target evnironment must be dev or prod";
     exit 1;
 fi
