@@ -27,6 +27,19 @@ Solution decided to use container to provide microservices solution. there are m
 ## Why not go to serverless?
 Serverless is not a good fit for this java application as it's using Prevayler database to persist data, which write to desk to save its state. Another eason is to avlid vendor locking as Kubernentes runs in all cloud providers and available as a service.
 
+# Concerns & suggestions application
+* Application uses Prevayler, which persist data in the file system at /Users/dcameron/persistence. This is not good for cloud native. pattern and against The twelve-factor methodology IV. *Backing services(Treat backing services as attached resources)*.
+* Application is a monolith. It include presentation, bussiness and datastore layers in one war file.
+* We cannot introduce caching or read-replica using Prevayler database.
+* Dessigned to scale vertically, but not horizontally.
+* All conatiniers need to share the same volume in order to keep the data in sync. This could be done using [Amazon Elastic File System (Amazon EFS)](!https://aws.amazon.com/efs/). Cannot guranate the peroformance with thousand concurrent simultaneously writing and reading data.
+
+
+## Suggestions
+* Change the datalayer to use RDS, recommend AWS auroa:
+⋅⋅* This will enable read replicas to manage high demand.
+* Split the application into Webpages, API gateway and store layers. this will help introduce caching between UI and APIs and between APIs and store layers.
+
 # Links
 * Infrastructure as Code and Microservices
 * [PhoenixServer](!https://martinfowler.com/bliki/PhoenixServer.html)
