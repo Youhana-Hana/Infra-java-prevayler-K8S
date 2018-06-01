@@ -3,10 +3,6 @@
 # Exit on first failure and treat unset variables as error
 set -eu
 
-# check AWS credentials exported
-:"${AWS_ACCESS_KEY_ID:?Need to set AWS Access Key ID}"
-:"${AWS_SECRET_ACCESS_KEY:?Need to set AWS Secret Access Key}"
-
 # Cluster alias default to dev
 export CLUSTER_ALIAS="dev"
 
@@ -33,13 +29,18 @@ export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${DOMAIN_NAME}"
 
 # AWS availability zone where the cluster will be created
 export CLUSTER_AWS_AZ="${CLUSTER_ALIAS}_AWS_AZ"
-
 export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${DOMAIN_NAME}"
-
 export CLUSTER_MASTER_AWS_EC2_SIZE="${CLUSTER_ALIAS}_CLUSTER_MASTER_SIZE"
 export CLUSTER_NODE_AWS_EC2_SIZE="${CLUSTER_ALIAS}_CLUSTER_NODE_SIZE"
 export CLUSTER_NODE_COUNT="${CLUSTER_ALIAS}_CLUSTER_NODE_COUNT"
-export K8S_VERSION="${CLUSTER_ALIAS}_CLUSTER_VERSION"
+export CLUSTER_VERSION="${CLUSTER_ALIAS}_CLUSTER_VERSION"
+
+echo ${CLUSTER_AWS_AZ}
+echo ${CLUSTER_FULL_NAME}
+echo ${CLUSTER_MASTER_AWS_EC2_SIZE}
+echo ${CLUSTER_NODE_AWS_EC2_SIZE}
+echo ${CLUSTER_NODE_COUNT}
+echo ${CLUSTER_VERSION}
 
 # Create a S3 bucket directly in AWS, which Kops will use to store all of the cluster configuration information:
 aws s3api create-bucket --bucket ${CLUSTER_FULL_NAME}-state
@@ -56,7 +57,7 @@ kops create cluster \
      --node-size=${CLUSTER_NODE_AWS_EC2_SIZE} \
      --node-count=${CLUSTER_NODE_COUNT} \
      --dns-zone=${DOMAIN_NAME} \
-     --kubernetes-version=${K8S_VERSION} \
+     --kubernetes-version=${CLUSTER_VERSION} \
      --ssh-public-key="~/.ssh/id_rsa.pub" \
      --yes
 #Create a cluster context alias in your kubeconfig file
