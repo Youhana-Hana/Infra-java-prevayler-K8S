@@ -69,3 +69,31 @@ kubectl version
 kops version
 aws help
 ```
+
+
+## What we got
+We got an ubuntu box, configured with all tools needed for the install Kubernetes using cops. We also exported both dev and prod configurations as environment variables
+
+
+```bash
+# export dev ENV variables to be used by provision script
+echoToProfile "export dev_AWS_REGION=us-east-1" #US East (N. Virginia)
+echoToProfile "export dev_AWS_AZ=us-east-1a" #availability zone
+echoToProfile "export dev_CLUSTER_MASTER_SIZE=t2.micro"  #use t2 micro for the master node
+echoToProfile "export dev_CLUSTER_NODE_SIZE=t2.nano"  #use t2.nano for the worker nodes
+echoToProfile "export dev_CLUSTER_NODE_COUNT=2"  #number of worker nodes
+echoToProfile "export dev_CLUSTER_VERSION=1.10.0"  #K8s version
+echoToProfile "export dev_CLUSTER_DOMAIN_NAME=youhanalabs.com" #Domain name registered by AWS
+
+# export production ENV variables to be used by provision script
+echoToProfile "export prod_AWS_REGION=us-east-1" #US East (N. Virginia)
+echoToProfile "export prod_AWS_AZ=us-east-2a,us-east-2b,us-east-2c" #availability zone
+echoToProfile "export prod_CLUSTER_MASTER_SIZE=t2.medium" #use t2 medium for the master node
+echoToProfile "export prod_CLUSTER_NODE_SIZE=t2.small" #use t2.small for the worker nodes
+echoToProfile "export prod_CLUSTER_NODE_COUNT=6" #number of worker nodes
+echoToProfile "export prod_CLUSTER_VERSION=1.10.0" #K8s version
+echoToProfile "export prod_CLUSTER_DOMAIN_NAME=youhanalabs.com" #Domain name registered by AWS
+```
+
+## Next up
+In the next step, We will deploy Kubernetes cluster using [seutp](../01-deploy-k8s/setup) script.

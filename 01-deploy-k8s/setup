@@ -52,15 +52,12 @@ kops create cluster \
      --kubernetes-version=${!CLUSTER_VERSION} \
      --ssh-public-key="~/.ssh/id_rsa.pub" \
      --yes
+
 #Create a cluster context alias in your kubeconfig file
 kubectl config set-context ${CLUSTER_ALIAS} --cluster=${CLUSTER_FULL_NAME} --user=${CLUSTER_FULL_NAME}
 
 #Use this new cluster context
 kubectl config use-context ${CLUSTER_ALIAS}
 
-echo 'Sleep for five minutes unti cluster created'
-sleep 5m
-
-# get cluster nodes
-kubectl get nodes
+echo 'We need to wait until clusted correclty provisoned then run kubectl get nodes to check it.'
 

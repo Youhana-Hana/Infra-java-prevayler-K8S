@@ -59,8 +59,8 @@ echoToProfile "export dev_CLUSTER_VERSION=1.10.0"  #K8s version
 echoToProfile "export dev_CLUSTER_DOMAIN_NAME=youhanalabs.com" #Domain name registered by AWS
 
 # export production ENV variables to be used by provision script
-echoToProfile "export prod_AWS_REGION=us-east-1" #US East (N. Virginia)
-echoToProfile "export prod_AWS_AZ=us-east-1a,us-east-1b,us-east-1d" #availability zone
+echoToProfile "export prod_AWS_REGION=us-east-2" #US East (N. Virginia)
+echoToProfile "export prod_AWS_AZ=us-east-2a,us-east-2b,us-east-2c" #availability zone
 echoToProfile "export prod_CLUSTER_MASTER_SIZE=t2.medium" #use t2 medium for the master node
 echoToProfile "export prod_CLUSTER_NODE_SIZE=t2.small" #use t2.small for the worker nodes
 echoToProfile "export prod_CLUSTER_NODE_COUNT=6" #number of worker nodes
