@@ -25,22 +25,14 @@ echo -e "Running aginst ${CLUSTER_ALIAS}"
 export DOMAIN_NAME="${CLUSTER_ALIAS}_CLUSTER_DOMAIN_NAME";
 
 # Cluster Full DNS name
-export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${DOMAIN_NAME}"
+export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${!DOMAIN_NAME}"
 
 # AWS availability zone where the cluster will be created
-export CLUSTER_AWS_AZ="${CLUSTER_ALIAS}_AWS_AZ"
-export CLUSTER_FULL_NAME="${CLUSTER_ALIAS}.${DOMAIN_NAME}"
-export CLUSTER_MASTER_AWS_EC2_SIZE="${CLUSTER_ALIAS}_CLUSTER_MASTER_SIZE"
-export CLUSTER_NODE_AWS_EC2_SIZE="${CLUSTER_ALIAS}_CLUSTER_NODE_SIZE"
-export CLUSTER_NODE_COUNT="${CLUSTER_ALIAS}_CLUSTER_NODE_COUNT"
-export CLUSTER_VERSION="${CLUSTER_ALIAS}_CLUSTER_VERSION"
-
-echo ${CLUSTER_AWS_AZ}
-echo ${CLUSTER_FULL_NAME}
-echo ${CLUSTER_MASTER_AWS_EC2_SIZE}
-echo ${CLUSTER_NODE_AWS_EC2_SIZE}
-echo ${CLUSTER_NODE_COUNT}
-echo ${CLUSTER_VERSION}
+export CLUSTER_AWS_AZ=$"${CLUSTER_ALIAS}_AWS_AZ"
+export CLUSTER_MASTER_AWS_EC2_SIZE=$"${CLUSTER_ALIAS}_CLUSTER_MASTER_SIZE"
+export CLUSTER_NODE_AWS_EC2_SIZE=$"${CLUSTER_ALIAS}_CLUSTER_NODE_SIZE"
+export CLUSTER_NODE_COUNT=$"${CLUSTER_ALIAS}_CLUSTER_NODE_COUNT"
+export CLUSTER_VERSION=$"${CLUSTER_ALIAS}_CLUSTER_VERSION"
 
 # Create a S3 bucket directly in AWS, which Kops will use to store all of the cluster configuration information:
 aws s3api create-bucket --bucket ${CLUSTER_FULL_NAME}-state
@@ -51,13 +43,13 @@ echo "export KOPS_STATE_STORE=s3://${CLUSTER_FULL_NAME}-state" >>~/.profile #kop
 
 kops create cluster \
      --name=${CLUSTER_FULL_NAME} \
-     --master-zones=${CLUSTER_AWS_AZ} \
-     --zones=${CLUSTER_AWS_AZ} \
-     --master-size=${CLUSTER_MASTER_AWS_EC2_SIZE} \
-     --node-size=${CLUSTER_NODE_AWS_EC2_SIZE} \
-     --node-count=${CLUSTER_NODE_COUNT} \
-     --dns-zone=${DOMAIN_NAME} \
-     --kubernetes-version=${CLUSTER_VERSION} \
+     --master-zones=${!CLUSTER_AWS_AZ} \
+     --zones=${!CLUSTER_AWS_AZ} \
+     --master-size=${!CLUSTER_MASTER_AWS_EC2_SIZE} \
+     --node-size=${!CLUSTER_NODE_AWS_EC2_SIZE} \
+     --node-count=${!CLUSTER_NODE_COUNT} \
+     --dns-zone=${!DOMAIN_NAME} \
+     --kubernetes-version=${!CLUSTER_VERSION} \
      --ssh-public-key="~/.ssh/id_rsa.pub" \
      --yes
 #Create a cluster context alias in your kubeconfig file
