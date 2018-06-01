@@ -63,3 +63,13 @@ cd ~/infra-java-prevayler-K8S/01-deploy-k8s
 ```
 
 Script will  delete all resources created during the setup step including the S3 bucket. ity zones.
+
+## Why there is no dashboard or cluster auto-scaling deployed
+Amazon already released EKS service as a Preview. Amazon Elastic Container Service for Kubernetes (Amazon EKS) is a managed service that
+makes it easy for you to run Kubernetes on AWS without needing to install and operate your own Kubernetes clusters.
+
+With Amazon EKS you get a highly-available, and secure Kubernetes control plane without needing to worry about provisioning, upgrades,
+or patching. Amazon EKS is certified Kubernetes conformant so you can use all existing plugins and tooling from the Kubernetes
+community. Any application running on any standard Kubernetes environment is fully compatible. 
+
+I would go to use this managed service and it will requires less time to manage and maintain.
