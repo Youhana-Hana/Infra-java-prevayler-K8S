@@ -24,6 +24,8 @@ We need to create infrastructure that is flexible, automatic, consistent, reprod
 # Explanation of the decisions
 Solution decided to use container to provide microservices solution. there are many concerns, when comes to microservices. For example, service discovery, auto-scaling, self healing, configurations, secrets, etc... This why Kubernetes is a good fit as most of these concerns managed by Kubernetes. Read more about [Kubernetes](!https://kubernetes.io/)
 
+![Reference Architecture](./Architecture.png)
+
 ## Why not go to serverless?
 Serverless is not a good fit for this java application as it's using Prevayler database to persist data, which write to desk to save its state. Another reason is to avoid vendor lock-in as Kubernetes runs in all cloud providers and available as a service.
 
