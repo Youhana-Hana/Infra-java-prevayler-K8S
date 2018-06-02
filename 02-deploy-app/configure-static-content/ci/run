@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# USAGE
+#  ./run -s <PATH> -t <ENV>
+# ./run -s ../src -t dev to confgiure development
+# ./run -s ../src -t prod to confgiure production
+
+
+# Exit on first failure and treat unset variables as error
+set -eu
+export target="dev"
+#
+
+while getopts t:s: option
+do
+    case "${option}"
+    in
+        t) target=${OPTARG};;
+        s) source=${OPTARG};;
+    esac
+done
+
+if ! [[ "${target}" =~ ^(dev|prod)$ ]]; then
+    echo "Target evnironment must be dev or prod";
+    exit 1;
+fi
+
+echo -e "Running aginst ${target}\n"
+
+cd ${source}
+
+export stateFile="../environments/${target}/terraform.tfstate"
+export planFile="../environments/${target}/tfplan"
+export varsFile="../environments/${target}/${target}.tfvars"
+
+# check terraform file through tflint
+echo -e "Check terraform file through tflint \n"
+tflint --var-file="${varsFile}"
+
+echo -e "-------------------------------------------------- \n"
+terraform init -input=false
+
+echo -r "Run terraform plan\n"
+
+terraform plan -var-file="${varsFile}" -out="${planFile}" -state="${stateFile}" -input=false
+
+terraform apply -input=false -state-out="${stateFile}" "${planFile}"

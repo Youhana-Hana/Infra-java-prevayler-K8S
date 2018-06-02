@@ -35,6 +35,12 @@ sudo chmod +x terraform
 sudo mv terraform /usr/local/bin/terraform
 rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
+# Install tflint
+wget https://github.com/wata727/tflint/releases/download/v0.6.0/tflint_linux_amd64.zip
+unzip tflint_linux_amd64.zip
+sudo install tflint /usr/local/bin
+rm -rf tflint_linux_amd64.zip
+
 # Install Kubectl (version specified in Vagrant installation variables above)
 wget --quiet https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
 sudo chmod +x kubectl
@@ -71,4 +77,5 @@ echoToProfile "export prod_CLUSTER_DOMAIN_NAME=youhanalabs.com" #Domain name reg
 source ~/.profile
 
 # clone repo
+rm -rf ~/infra-java-prevayler-K8S
 git clone https://github.com/Youhana-Hana/Infra-java-prevayler-K8S.git ~/infra-java-prevayler-K8S
