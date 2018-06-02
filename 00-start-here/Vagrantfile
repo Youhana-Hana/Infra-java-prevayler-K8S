@@ -13,6 +13,8 @@ Vagrant.configure(2) do |config|
     vb.cpus = 2
   end
 
+  config.vm.synced_folder "../02-deploy-app/", "/src/02-deploy-app"
+
   config.vm.post_up_message = "Please set AWS API credential variables && create SSH keys."
 
 # Run the provision-vagrant.sh script
