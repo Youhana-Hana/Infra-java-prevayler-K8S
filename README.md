@@ -26,7 +26,7 @@ Solution decided to use container to provide microservices solution. there are m
 
 ![Reference Architecture](./Architecture.png)
 
-## Why not go to serverless?
+## Why not to go serverless?
 Serverless is not a good fit for this java application as it's using Prevayler database to persist data, which write to desk to save its state. Another reason is to avoid vendor lock-in as Kubernetes runs in all cloud providers and available as a service.
 
 # Other Deployment Options
