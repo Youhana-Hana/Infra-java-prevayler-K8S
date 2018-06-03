@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+# delete deployment and services
+kubectl delete svc comapny-news-service
+
+kubectl delete deploy comapny-news-deployment
