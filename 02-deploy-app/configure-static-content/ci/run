@@ -40,8 +40,16 @@ tflint --var-file="${varsFile}"
 echo -e "-------------------------------------------------- \n"
 terraform init -input=false
 
-echo -r "Run terraform plan\n"
+echo -e "Run terraform plan\n"
 
 terraform plan -var-file="${varsFile}" -out="${planFile}" -state="${stateFile}" -input=false
 
 terraform apply -input=false -state-out="${stateFile}" "${planFile}"
+
+export bucket_name=$(terraform output -state="${stateFile}" site_bucket)
+# download the static files and upload them to s3
+echo -e "Download static.zip and upload it to S3 bucket ${bucket_name}\n"
+wget -O static.zip https://s3.amazonaws.com/infra-assessment/static.zip
+unzip static.zip
+aws s3 cp static "s3://${bucket_name}" --recursive
+rm -rf static.zip static
