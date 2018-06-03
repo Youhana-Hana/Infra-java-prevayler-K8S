@@ -2,6 +2,6 @@
 set -e
 
 # delete deployment and services
-kubectl delete svc company-news-service
+kubectl delete svc company-news-service,company-news-static-service
 
-kubectl delete deploy company-news-deployment
+kubectl delete deploy company-news-deployment,company-news-static-deployment

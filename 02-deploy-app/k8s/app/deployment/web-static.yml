@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: company-news-static-deployment
+  labels:
+    app: company-news-static
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: company-news-static
+  template:
+    metadata:
+      labels:
+        app: company-news-static
+    spec:
+      containers:
+      - name: company-news-static
+        image: youhana/company-news-static:1.0.0
+        ports:
+        - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: company-news-static-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: company-news-static
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    name: http
