@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+# deploy app deployment and service
+kubectl create -f deployment/deployment.yml
+
+# smoke test to list all pods, deployments and services
+kubectl get pod,deploy,svc
+
+kubectl get svc/company-news-service --template="{{range .status.loadBalancer.ingress}} {{.hostname}} {{end}}"

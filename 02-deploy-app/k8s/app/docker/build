@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+# Set your Docker Hub username 
+export DOCKER_HUB_USERNAME="youhana"
+export WEB_APP_TAG="1.0.0"
+
+
+docker login -u ${DOCKER_HUB_USERNAME}
+
+# Build a Docker image using the Dockerfile you just updated
+# Push it
+
+docker build -t ${DOCKER_HUB_USERNAME}/company-news-app:${WEB_APP_TAG} --rm ./web-app/
+docker push ${DOCKER_HUB_USERNAME}/company-news-app:${WEB_APP_TAG}
+
+# Remove the local version of the Docker image
+docker rmi $(docker images --filter=reference="${DOCKER_HUB_USERNAME}/company-news-app" -q)
