@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: company-news-static
-        image: youhana/company-news-static:1.0.0
+        image: youhana/company-news-static:1.0.1
         ports:
         - containerPort: 80
 ---

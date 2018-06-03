@@ -3,7 +3,7 @@ set -e
 
 # Set your Docker Hub username 
 export DOCKER_HUB_USERNAME="youhana"
-export WEB_APP_TAG="1.0.0"
+export WEB_APP_TAG="1.0.1"
 
 
 docker login -u ${DOCKER_HUB_USERNAME}
