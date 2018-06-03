@@ -10,9 +10,15 @@ docker login -u ${DOCKER_HUB_USERNAME}
 
 # Build a Docker image using the Dockerfile you just updated
 # Push it
-
+echo -e "Build comapny news web app image\n"
 docker build -t ${DOCKER_HUB_USERNAME}/company-news-app:${WEB_APP_TAG} --rm ./web-app/
 docker push ${DOCKER_HUB_USERNAME}/company-news-app:${WEB_APP_TAG}
 
+echo -e "Build comapny news static files image\n"
+docker build -t ${DOCKER_HUB_USERNAME}/company-news-static:${WEB_APP_TAG} --rm ./static/
+docker push ${DOCKER_HUB_USERNAME}/company-news-static:${WEB_APP_TAG}
+
 # Remove the local version of the Docker image
+echo -e "Removing local images\n"
+docker rmi $(docker images --filter=reference="${DOCKER_HUB_USERNAME}/company-news-static" -q)
 docker rmi $(docker images --filter=reference="${DOCKER_HUB_USERNAME}/company-news-app" -q)

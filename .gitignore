@@ -4,6 +4,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+*tfplan*
 
 # vagrant
 .vagrant
