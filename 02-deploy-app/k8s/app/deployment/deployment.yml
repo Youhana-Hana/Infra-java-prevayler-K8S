@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: company-news
-        image: youhana/comapny-news-app:1.0.0
+        image: youhana/company-news-app:1.0.0
         ports:
         - containerPort: 8080
 ---
