@@ -10,8 +10,8 @@ kubectl create -f deployment/web-static.yml
 # smoke test to list all pods, deployments and services
 kubectl get pod,deploy,svc
 
-echo -e 'Sleeping 10 seconds'
-sleep 10s
+echo -e "Waiting for Hugo App ELB to be created (60 seconds)\n"
+sleep 60
 
 echo -e "Copy the given loadbalancer URL into the browser\n"
 kubectl get svc/company-news-service --template="{{range .status.loadBalancer.ingress}} {{.hostname}} {{end}}"

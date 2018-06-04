@@ -11,7 +11,24 @@ We need to create infrastructure that is flexible, automatic, consistent, reprod
 
 * Setup local development environment for DevOps. Follow [00-start-here/README.md/REAMDME](./00-start-here/README.md)
 * Setup development environment. Follow [01-deploy-k8s/REAMDME](./01-deploy-k8s/README.md)
-* Setup production environment. Follow [01-deploy-k8s/ REAMDME](./01-deploy-k8s/README.md)
+* Setup production environment. Follow [01-deploy-k8s/REAMDME](./01-deploy-k8s/README.md)
+* Deploy company new application. Follow [02-deploy-app/REAMDME](./02-deploy-app/README.md)
+
+# Installation
+Clone the repo, update `~/infra-java-prevayler-K8S/00-start-here/provision` export variables `_CLUSTER_DOMAIN_NAME=youhanalabs.com` to poin to your domain name.
+
+```bash
+git clone https://github.com/Youhana-Hana/Infra-java-prevayler-K8S.git ~/infra-java-prevayler-K8S
+cd 00-start-here
+vagrant up
+vagrant ssh
+export AWS_ACCESS_KEY_ID="AWS Access Key ID"
+export AWS_SECRET_ACCESS_KEY="AWS Secret Access Key"
+cd ~/infra-java-prevayler-K8S
+./01-deploy-k8s/setup -t dev
+./02-deploy-app/configure-static-content/ci/setup -t dev -s 02-deploy-app/configure-static-content/src
+./02-deploy-app/k8s/app/deploy
+```
 
 # Principles applied
 * Native cloud applications & Microservice architecture

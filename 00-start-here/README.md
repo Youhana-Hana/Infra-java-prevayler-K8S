@@ -20,7 +20,7 @@ cd 00-start-here
 
 You can use your existing AWS user account or you can choose to create a dedicated user account for Kops.
 
-### Setup Kops Requirments
+### Setup Kops Requirements
 Please refer to [kops requirments](https://github.com/kubernetes/kops/blob/master/docs/aws.md).
 
 If you are using your existing AWS user account, you must have at a minimum the following [IAM policies attached](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#policies_using-managed-console) to it (or you can use the `AdministratorAccess` policy which includes all of these permissions):
@@ -97,3 +97,5 @@ echoToProfile "export prod_CLUSTER_DOMAIN_NAME=youhanalabs.com" #Domain name reg
 
 ## Next up
 In the next step, We will deploy Kubernetes cluster using [seutp](../01-deploy-k8s/setup) script.
+
+

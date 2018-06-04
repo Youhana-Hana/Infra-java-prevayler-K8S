@@ -38,7 +38,7 @@ kops create cluster \
 ```
 
 Script will create S3 bucket to save kops state. Bucket name `--bucket ${CLUSTER_FULL_NAME}-state`, then deploy kubernetes using kops.
-Kubernetes will have 6 worker nodes, and three master in us-east-2, across thrree availability zones.
+Kubernetes will have 6 worker nodes, and three master in us-east-2, across three availability zones.
 
 ## Why to deploy development and production clusters in two different regions
 Better to isolate development environment from production one, even better to use different AWS accounts. This will help:
@@ -73,3 +73,5 @@ or patching. Amazon EKS is certified Kubernetes conformant so you can use all ex
 community. Any application running on any standard Kubernetes environment is fully compatible. 
 
 I would go to use this managed service and it will requires less time to manage and maintain.
+
+

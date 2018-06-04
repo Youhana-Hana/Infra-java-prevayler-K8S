@@ -40,6 +40,7 @@ aws s3api create-bucket --bucket ${CLUSTER_FULL_NAME}-state
 # Export S3 URL
 export KOPS_STATE_STORE="s3://${CLUSTER_FULL_NAME}-state"
 echo "export KOPS_STATE_STORE=s3://${CLUSTER_FULL_NAME}-state" >>~/.profile #kops s3 bucket state
+source ~/.profile >> /dev/null 2>&1
 
 kops create cluster \
      --name=${CLUSTER_FULL_NAME} \
