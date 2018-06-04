@@ -26,8 +26,9 @@ export AWS_ACCESS_KEY_ID="AWS Access Key ID"
 export AWS_SECRET_ACCESS_KEY="AWS Secret Access Key"
 cd ~/infra-java-prevayler-K8S
 ./01-deploy-k8s/setup -t dev
-./02-deploy-app/configure-static-content/ci/setup -t dev -s 02-deploy-app/configure-static-content/src
-./02-deploy-app/k8s/app/deploy
+cd 02-deploy-app/configure-static-content/ci
+./setup -t dev -s ../src
+../../k8s/app/deploy
 ```
 
 # Principles applied
