@@ -10,7 +10,7 @@ kubectl create -f deployment/web-static.yml
 # smoke test to list all pods, deployments and services
 kubectl get pod,deploy,svc
 
-echo -e "Waiting for Hugo App ELB to be created (60 seconds)\n"
+echo -e "Waiting for company-news app ELB to be created (60 seconds)\n"
 sleep 60
 
 echo -e "Copy the given loadbalancer URL into the browser\n"
