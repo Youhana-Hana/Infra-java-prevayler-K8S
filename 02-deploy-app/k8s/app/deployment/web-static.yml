@@ -5,28 +5,24 @@ metadata:
 data:
   default.conf: |
     upstream node {
-      server localhost;
+      server web.youhanalabs.com;
     }
     server {
       listen                  80;
-      server_name             _;
-      root                    /usr/share/nginx/html;
-      location /images/ {
+      server_name             web.youhanalabs.com;
+      root                    web.youhanalabs.com;
+      location /root/images/ {
         # CHANGE ME
         proxy_pass http://d2nwqvg6f6qh3u.cloudfront.net/images/;
         expires 1y; 
       }
-      location /styles/ {
+      location /root/styles/ {
         # CHANGE ME
         proxy_pass http://d2nwqvg6f6qh3u.cloudfront.net/styles/;
         expires 1y; 
       }
       location / {
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_pass http://company-news-service.default.svc.cluster.local;
-        proxy_redirect on;
-        port_in_redirect on;
+        proxy_pass http://company-news-service;
       }
     }
 ---
