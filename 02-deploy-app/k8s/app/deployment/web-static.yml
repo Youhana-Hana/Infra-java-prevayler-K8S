@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: company-news-static
-        image: nginx:1.13.6-alpine
+        image: nginx:1.13.12-2alpine
         imagePullPolicy: Always
         ports:
         - containerPort: 80
