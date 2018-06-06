@@ -22,13 +22,14 @@ git clone https://github.com/Youhana-Hana/Infra-java-prevayler-K8S.git ~/infra-j
 cd 00-start-here
 vagrant up
 vagrant ssh
+
 export AWS_ACCESS_KEY_ID="AWS Access Key ID"
 export AWS_SECRET_ACCESS_KEY="AWS Secret Access Key"
-cd ~/infra-java-prevayler-K8S
+
+cd ~/infra-java-prevayler-K8S/
 ./01-deploy-k8s/setup -t dev
-cd 02-deploy-app/configure-static-content/ci
-./setup -t dev -s ../src
-../../k8s/app/deploy
+./02-deploy-app/configure-static-content/ci/setup -t dev -s ../src
+./02-deploy-app/k8s/app/deploy
 ```
 
 # Principles applied
