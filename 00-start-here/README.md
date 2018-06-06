@@ -27,6 +27,7 @@ If you are using your existing AWS user account, you must have at a minimum the 
 
 ```console
 AmazonEC2FullAccess
+CloudFrontFullAccess
 AmazonRoute53FullAccess
 AmazonS3FullAccess
 IAMFullAccess
