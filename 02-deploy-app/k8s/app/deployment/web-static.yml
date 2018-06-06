@@ -1,3 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |
+    upstream node {
+      server localhost;
+    }
+    server {
+      listen                  80;
+      server_name             _;
+      root                    /usr/share/nginx/html;
+      location /images/ {
+        # CHANGE ME
+        proxy_pass http://d2nwqvg6f6qh3u.cloudfront.net/images/;
+        expires 1y; 
+      }
+      location /styles/ {
+        # CHANGE ME
+        proxy_pass http://d2nwqvg6f6qh3u.cloudfront.net/styles/;
+        expires 1y; 
+      }
+      location / {
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_pass http://company-news-service;
+        proxy_redirect off;
+        port_in_redirect off;
+      }
+    }
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,9 +48,18 @@ spec:
     spec:
       containers:
       - name: company-news-static
-        image: youhana/company-news-static:1.0.1
+        image: nginx:1.13.6-alpine
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+      # Load the configuration files for nginx
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
 ---
 kind: Service
 apiVersion: v1
