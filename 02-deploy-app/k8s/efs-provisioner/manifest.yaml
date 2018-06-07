@@ -29,12 +29,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: efs-provisioner
-                  key: fs-fe50d8b6
+                  key: file.system.id
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
                   name: efs-provisioner
-                  key: us-east-1
+                  key: aws.region
             - name: PROVISIONER_NAME
               valueFrom:
                 configMapKeyRef:
@@ -46,7 +46,7 @@ spec:
       volumes:
         - name: pv-volume
           nfs:
-            server: fs-fe50d8b6.efs.us-east-1.amazonaws.com
+            server: yourEFSsystemID.efs.yourEFSregion.amazonaws.com
             path: /
 ---
 kind: StorageClass

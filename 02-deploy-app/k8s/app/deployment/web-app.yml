@@ -19,6 +19,13 @@ spec:
         image: youhana/company-news-app:1.0.0
         ports:
         - containerPort: 8080
+        volumeMounts:
+          - name: efs-pvc
+            mountPath: "/Users/dcameron/persistence"
+      volumes:
+        - name: efs-pvc
+          persistentVolumeClaim:
+            claimName: efs
 ---
 kind: Service
 apiVersion: v1
