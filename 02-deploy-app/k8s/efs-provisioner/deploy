@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+# deploy eps provisioner deployment
+kubectl create -f manifest.yml

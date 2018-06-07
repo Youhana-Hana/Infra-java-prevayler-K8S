@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+# delete efs provisioner components
+kubectl delete ConfigMap efs-provisioner
+
+kubectl delete deploy efs-provisioner
+
+kubectl delete StorageClass deploy aws-efs
+
+kubectl delete PersistentVolumeClaim efs
