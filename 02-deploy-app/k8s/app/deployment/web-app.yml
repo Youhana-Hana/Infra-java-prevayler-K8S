@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: company-news
-        image: youhana/company-news-app:1.0.0
+        image: youhana/company-news-app:1.0.2
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         volumeMounts:
