@@ -37,6 +37,8 @@ export CLUSTER_VERSION=$"${CLUSTER_ALIAS}_CLUSTER_VERSION"
 # Create a S3 bucket directly in AWS, which Kops will use to store all of the cluster configuration information:
 aws s3api create-bucket --bucket ${CLUSTER_FULL_NAME}-state
 
+aws s3api put-bucket-versioning --bucket ${CLUSTER_FULL_NAME}-state --versioning-configuration Status=Enabled
+
 # Export S3 URL
 export KOPS_STATE_STORE="s3://${CLUSTER_FULL_NAME}-state"
 echo "export KOPS_STATE_STORE=s3://${CLUSTER_FULL_NAME}-state" >>~/.profile #kops s3 bucket state
