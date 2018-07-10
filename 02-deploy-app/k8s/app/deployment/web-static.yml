@@ -5,20 +5,20 @@ metadata:
 data:
   default.conf: |
     upstream node {
-      server web.youhanalabs.com;
+      server localhost;
     }
     server {
       listen                  80;
-      server_name             web.youhanalabs.com;
-      root                    web.youhanalabs.com;
-      location /root/images/ {
+      server_name             localhost;
+      root                    localhost;
+      location /images/ {
         # CHANGE ME
-        proxy_pass http://d2nwqvg6f6qh3u.cloudfront.net/images/;
+        proxy_pass http://di8rxk4bytog8.cloudfront.net/images/;
         expires 1y; 
       }
-      location /root/styles/ {
+      location /styles/ {
         # CHANGE ME
-        proxy_pass http://d2nwqvg6f6qh3u.cloudfront.net/styles/;
+        proxy_pass http://di8rxk4bytog8.cloudfront.net/styles/;
         expires 1y; 
       }
       location / {
