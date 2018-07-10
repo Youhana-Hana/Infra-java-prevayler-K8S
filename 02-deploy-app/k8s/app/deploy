@@ -2,10 +2,10 @@
 set -e
 
 # deploy app deployment and service
-kubectl create -f deployment/web-app.yml
+kubectl apply -f deployment/web-app.yml
 
 # deploy app deployment and service
-kubectl create -f deployment/web-static.yml
+kubectl apply -f deployment/web-static.yml
 
 # smoke test to list all pods, deployments and services
 kubectl get pod,deploy,svc
