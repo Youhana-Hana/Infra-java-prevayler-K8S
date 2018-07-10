@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-# delete deployment and services
-kubectl delete svc company-news-service company-news-static-service
+# delete app deployment and service
+kubectl delete -f deployment/web-app.yml
 
-kubectl delete deploy company-news-deployment company-news-static-deployment
+# delete app deployment and service
+kubectl delete -f deployment/web-static.yml
