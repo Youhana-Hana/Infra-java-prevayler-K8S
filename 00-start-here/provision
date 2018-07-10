@@ -19,37 +19,73 @@ sudo apt-get install jq -y
 sudo apt-get install unzip -y
 
 # Install AWS CLI (latest)
+if [ ! -f /usr/local/bin/aws ]; then
 curl -s https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
 unzip awscli-bundle.zip
 sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 rm -rf awscli-bundle/ awscli-bundle.zip
+fi
 
 # Install Docker (latest)
-sudo curl -sSL https://get.docker.com/ | sh
-sudo usermod -aG docker vagrant
+if [ ! -f /usr/bin/docker ]; then
+ sudo curl -sSL https://get.docker.com/ | sh
+ sudo usermod -aG docker vagrant
+fi
 
 # Install Terraform (version specified in Vagrant installation variables above)
-wget --quiet https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-sudo chmod +x terraform
-sudo mv terraform /usr/local/bin/terraform
-rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+if [ ! -f /usr/local/bin/terraform ]; then
+   wget --quiet https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+   unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+   sudo chmod +x terraform
+   sudo mv terraform /usr/local/bin/terraform
+   rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+fi
 
 # Install tflint
-wget https://github.com/wata727/tflint/releases/download/v0.6.0/tflint_linux_amd64.zip
-unzip tflint_linux_amd64.zip
-sudo install tflint /usr/local/bin
-rm -rf tflint_linux_amd64.zip
+if [ ! -f /usr/local/bin/tflint ]; then
+   wget --quiet https://github.com/wata727/tflint/releases/download/v0.6.0/tflint_linux_amd64.zip
+   unzip tflint_linux_amd64.zip
+   sudo install tflint /usr/local/bin
+   rm -rf tflint_linux_amd64.zip
+fi
 
+# Install packer
+if [ ! -f /usr/local/bin/packer ]; then
+   wget --quiet https://releases.hashicorp.com/packer/1.2.4/packer_1.2.4_linux_amd64.zip
+   unzip packer_1.2.4_linux_amd64.zip
+   sudo chmod +x packer
+   sudo mv packer /usr/local/bin/packer
+   rm -rf packer_1.2.4_linux_amd64.zip
+fi
 # Install Kubectl (version specified in Vagrant installation variables above)
-wget --quiet https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
-sudo chmod +x kubectl
-sudo mv kubectl /usr/local/bin/kubectl
+if [ ! -f  /usr/local/bin/kubectl ]; then
+ wget --quiet https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+ sudo chmod +x kubectl
+ sudo mv kubectl /usr/local/bin/kubectl
+fi
 
 # Install Kops (version specified in Vagrant installation variables above)
-wget --quiet https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64
-sudo chmod +x kops-linux-amd64
-sudo mv kops-linux-amd64 /usr/local/bin/kops
+if [ ! -f /usr/local/bin/kops ]; then
+   wget --quiet https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64
+   sudo chmod +x kops-linux-amd64
+   sudo mv kops-linux-amd64 /usr/local/bin/kops
+fi
+
+# Install GO (version specified in Vagrant installation variables above)
+if [ ! -f /usr/local/go/bin/go ]; then
+   wget --quiet https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+   sudo tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz
+   rm -rf go1.10.3.linux-amd64.tar.gz
+   echoToProfile "export GOPATH=$HOME/go"
+   echoToProfile "export GOBIN=$GOPATH/bin"
+   echoToProfile "export PATH=$PATH:/usr/local/go/bin:$GOBIN"
+   mkdir -p ~/go/bin
+fi
+
+# install dep. Go dependency manager
+if [ ! -f $HOME/go/bin/dep ]; then
+   sudo curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+fi
 
 # Setup autocomplete for Kubectl
 echoToProfile "source <(kubectl completion bash)"
