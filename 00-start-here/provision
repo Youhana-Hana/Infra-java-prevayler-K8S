@@ -17,6 +17,7 @@ cd /home/vagrant
 sudo apt-get install git -y
 sudo apt-get install jq -y
 sudo apt-get install unzip -y
+sudo apt-get install tmux -y
 
 # Install AWS CLI (latest)
 if [ ! -f /usr/local/bin/aws ]; then
